@@ -5,10 +5,7 @@ Here the "Complexity and Real Computation" team collects contributions and exten
 * Grassmannian/Quantum Logic
 * ...
 
-## iRRAM-Random
-This is a work-in-progress repository which provides a module for randomly generated real numbers, complex numbers, matrices in iRRAM.
-
-### iRRAM
+## iRRAM
 iRRAM is a open source C++ library for real number computation (Exact Real Arithmetic). It is developed in University of Trier. For more information, visit http://irram.uni-trier.de
 
 For the sake of advertising, below is what iRRAM can do:
@@ -22,6 +19,9 @@ cout << x
 }
 ```
 >+.31415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253E+0001
+
+## iRRAM-Random
+This is a work-in-progress repository which provides a module for randomly generated real numbers, complex numbers, matrices in iRRAM.
 
 ### How to use
 You first need to be comfortable working with iRRAM. For this, see iRRAM's documentation and example codes.
