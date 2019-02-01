@@ -1,5 +1,9 @@
 # iRRAMPLUS
-
+Here the "Complexity and Real Computation" team collects contributions and extensions to the iRRAM C++ library:
+* continuous conditional
+* random real numbers and functions
+* Grassmannian/Quantum Logic
+* ...
 
 ## iRRAM-Random
 This is a work-in-progress repository which provides a module for randomly generated real numbers, complex numbers, matrices in iRRAM.
