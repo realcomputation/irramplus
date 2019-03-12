@@ -7,9 +7,9 @@
 #include <string> 
 
 using namespace iRRAM;
+using namespace random;
 
-
-INTEGER pow(int a, int b)
+static INTEGER pow(int a, int b)
 {
   INTEGER result = 1;
   for(int i=0; i< b; i++)

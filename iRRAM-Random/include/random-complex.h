@@ -14,11 +14,12 @@ This header file is for providing random complex number generators
 #include "../include/random-real.h"
 
 
-using namespace iRRAM;
+namespace iRRAM::random {
 
 COMPLEX uniform_complex();
 COMPLEX uniform_complex(COMPLEX, REAL);
 COMPLEX gaussian_complex();
 
+}
 
 #endif

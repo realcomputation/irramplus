@@ -6,6 +6,7 @@
 #include "include/random-complex.h"
 
 using namespace iRRAM;
+using namespace random;
 
 // plot empirical distribution of R[] in (a,b) with
 // x-resolution and y-resolution on a terminal.

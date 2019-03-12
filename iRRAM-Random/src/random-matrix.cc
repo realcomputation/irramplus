@@ -2,9 +2,10 @@
 #include <utility>
 
 using namespace iRRAM;
+using namespace random;
 
 
-REALMATRIX gaussian_symmetric_matrix(unsigned int n)
+REALMATRIX random::gaussian_symmetric_matrix(unsigned int n)
 {
   REALMATRIX M = REALMATRIX(n, n);
   for (unsigned int i = 0; i < n; i++)
@@ -13,7 +14,7 @@ REALMATRIX gaussian_symmetric_matrix(unsigned int n)
   return M;
 }
 
-REALMATRIX gaussian_asymmetric_matrix(unsigned int n)
+REALMATRIX random::gaussian_asymmetric_matrix(unsigned int n)
 {
   REALMATRIX M = REALMATRIX(n, n);
   for (unsigned int i = 0; i < n; i++)
@@ -23,7 +24,7 @@ REALMATRIX gaussian_asymmetric_matrix(unsigned int n)
 }
 
 
-REALMATRIX gaussian_matrix(unsigned int n)
+REALMATRIX random::gaussian_matrix(unsigned int n)
 {
   REALMATRIX M = REALMATRIX(n,n);
   for(int i=0; i<n; i++)
@@ -32,14 +33,15 @@ REALMATRIX gaussian_matrix(unsigned int n)
   return M;
 }
 
-REALMATRIX basisVector(int i, int n)
+static REALMATRIX basisVector(int i, int n)
 {
   REALMATRIX M = REALMATRIX(n, 1);
   M(i,0) = 1;
   return M;
 }
 
-REALMATRIX transpose(REALMATRIX M)
+/* TODO: why not export this common and useful function? */
+static REALMATRIX transpose(REALMATRIX M)
 {
   REALMATRIX N =REALMATRIX(M.maxcolumn, M.maxrow);
   for(int i=0; i < (int)M.maxcolumn; i++)
@@ -48,7 +50,7 @@ REALMATRIX transpose(REALMATRIX M)
   return N;
 }
 
-REALMATRIX subMatrix(REALMATRIX M, int r, int c)
+static REALMATRIX subMatrix(REALMATRIX M, int r, int c)
 {
   REALMATRIX N = REALMATRIX(M.maxrow-r, M.maxcolumn-c);
   for(int i=r; i <(int)M.maxrow; i++)
@@ -58,7 +60,7 @@ REALMATRIX subMatrix(REALMATRIX M, int r, int c)
 
 }
 
-REAL inner(REALMATRIX u, REALMATRIX v)
+static REAL inner(REALMATRIX u, REALMATRIX v)
 {
   assert(u.maxrow == v.maxrow);
   assert(u.maxcolumn == 1);
@@ -72,7 +74,7 @@ REAL inner(REALMATRIX u, REALMATRIX v)
   return sum;
 }
 
-REALMATRIX colVector(REALMATRIX u, int idx)
+static REALMATRIX colVector(REALMATRIX u, int idx)
 {
   REALMATRIX v = REALMATRIX(u.maxrow, 1);
   for (int i=0; i<(int) u.maxrow; i++)
@@ -85,7 +87,7 @@ REALMATRIX colVector(REALMATRIX u, int idx)
 // Stewart, Gilbert W. "The efficient generation of random orthogonal matrices 
 // with an application to condition estimators." SIAM Journal on Numerical 
 // Analysis 17.3 (1980): 403-409.
-REALMATRIX haar_orthogonal_matrix(unsigned int n)
+REALMATRIX random::haar_orthogonal_matrix(unsigned int n)
 {
   REALMATRIX X = gaussian_matrix(n);
   REALMATRIX Y = X;
