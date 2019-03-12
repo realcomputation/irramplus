@@ -8,10 +8,7 @@ This header file is for providing random matrix generators
 #ifndef RANDOMMATRIX_H
 #define RANDOMMATRIX_H
 
-#include "iRRAM/lib.h"
-#include "iRRAM/core.h"
-#include "../include/random-core.h"
-#include "../include/random-real.h"
+#include <random-real.h>
 
 namespace iRRAM::random {
 

@@ -1,9 +1,8 @@
-#include "iRRAM/lib.h"
-#include "iRRAM/core.h"
-#include "iRRAM.h"
 
-#include "include/random-real.h"
-#include "include/random-complex.h"
+#include <iRRAM.h>
+
+#include <random-real.h>
+#include <random-complex.h>
 
 using namespace iRRAM;
 using namespace random;

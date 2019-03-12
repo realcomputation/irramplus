@@ -8,9 +8,7 @@ This header file is for providing random real number generators
 #ifndef RANDOMREAL_H
 #define RANDOMREAL_H
 
-#include "iRRAM/lib.h"
-#include "iRRAM/core.h"
-#include "random-core.h"
+#include <random-core.h>
 
 namespace iRRAM::random {
 

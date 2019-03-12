@@ -1,5 +1,7 @@
-#include "../include/random-matrix.h"
+
 #include <utility>
+
+#include <random-matrix.h>
 
 using namespace iRRAM;
 using namespace random;

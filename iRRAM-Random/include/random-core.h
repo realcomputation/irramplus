@@ -12,8 +12,7 @@ this file should not be accessed from user application.
 #ifndef RANDOMCORE_H
 #define RANDOMCORE_H
 
-#include "iRRAM/lib.h"
-#include "iRRAM/core.h"
+#include <iRRAM/lib.h>
 
 namespace iRRAM::random {
 

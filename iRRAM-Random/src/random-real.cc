@@ -1,4 +1,5 @@
-#include "../include/random-real.h"
+
+#include <random-real.h>
 
 using namespace iRRAM;
 using namespace random;

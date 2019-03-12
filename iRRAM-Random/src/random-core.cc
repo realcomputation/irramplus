@@ -1,10 +1,11 @@
-#include "../include/random-core.h"
 
 #include <utility>
 #include <stdlib.h>     
 #include <random>
 #include <vector>
 #include <string> 
+
+#include <random-core.h>
 
 using namespace iRRAM;
 using namespace random;
