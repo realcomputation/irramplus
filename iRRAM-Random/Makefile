@@ -10,7 +10,6 @@ BIN = \
 	examples/plot
 
 LIB_OBJS = \
-	src/random-core.o \
 	src/random-real.o \
 	src/random-matrix.o \
 	src/random-complex.o \
