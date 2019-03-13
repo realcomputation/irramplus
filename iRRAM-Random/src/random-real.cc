@@ -6,8 +6,6 @@
 using namespace iRRAM;
 using namespace random;
 
-namespace {
-
 static INTEGER pow(int a, int b)
 {
   INTEGER result = 1;
@@ -16,22 +14,12 @@ static INTEGER pow(int a, int b)
   return result;
 }
 
-
-class REALRAND
+REAL random::uniform_real()
 {
-  private:
     int bitlength;
     std::string bits;
     REAL randreal;
 
-  public:
-    REALRAND();
-    ~REALRAND();
-    REAL asREAL();
-};
-
-REALRAND::REALRAND()
-  {
     int prec = state->ACTUAL_STACK.actual_prec;
 
     sizetype err;
@@ -113,23 +101,8 @@ REALRAND::REALRAND()
     randreal = RATIONAL(INTEGER(bits), pow(2,bitlength));
     randreal.adderror(err);
   }
-}
 
-
-REALRAND::~REALRAND()
-  {
-  }
-
-REAL REALRAND::asREAL()
-  {
-    return randreal;
-  }
-
-} /* end anonymous namespace */
-
-REAL random::uniform_real()
-{
-  return REALRAND().asREAL();
+  return randreal;
 }
 
 REAL random::uniform_real(REAL a, REAL b)
