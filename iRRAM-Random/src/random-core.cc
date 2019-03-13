@@ -5,7 +5,7 @@
 #include <vector>
 #include <string> 
 
-#include <random-core.h>
+#include "random-core.h"
 
 using namespace iRRAM;
 using namespace random;

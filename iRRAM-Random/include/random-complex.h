@@ -8,10 +8,9 @@ This header file is for providing random complex number generators
 #ifndef RANDOMCOMPLEX_H
 #define RANDOMCOMPLEX_H
 
-#include "iRRAM/lib.h"
-#include "iRRAM/core.h"
-#include "../include/random-core.h"
-#include "../include/random-real.h"
+#include <iRRAM/lib.h>
+
+#include <random-real.h>
 
 
 namespace iRRAM::random {
