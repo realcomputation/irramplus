@@ -4,6 +4,17 @@
 using namespace iRRAM;
 using namespace random;
 
+typename random_device::result_type random_device::operator()()
+{
+	result_type r;
+	state_t &st = *state;
+	if (get_cached(r, st))
+		return r;
+	r = std::random_device::operator()();
+	put_cached(r, st);
+	return r;
+}
+
 REAL random::uniform_real(unsigned int seed)
 {
   std::mt19937 gen(seed); //Standard mersenne_twister_engine seeded with rd()

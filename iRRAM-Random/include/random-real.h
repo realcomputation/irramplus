@@ -12,12 +12,27 @@ This header file is for providing random real number generators
 
 #include <iRRAM/lib.h>
 
+namespace iRRAM {
+
+/* TODO: inside limits returns unrelated results wrt. reiterations */
+class random_device : std::random_device {
+public:
+	using std::random_device::result_type;
+	using std::random_device::random_device;
+	using std::random_device::operator=;
+	using std::random_device::entropy;
+	using std::random_device::min;
+	using std::random_device::max;
+
+	result_type operator()();
+};
+
+}
+
 namespace iRRAM::random {
 
 /* seed will be used to obtain a seed for the random number engine */
-/* TODO: switch to iRRAM::random_device in order for reiterations to return
- *       consistent (discrete for arguments, continuous for results) values */
-REAL uniform_real(unsigned int seed = std::random_device{}());
+REAL uniform_real(unsigned int seed = random_device{}());
 REAL uniform_real(REAL, REAL);
 
 REAL gaussian_real();
