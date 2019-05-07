@@ -1,0 +1,245 @@
+\documentclass[12pt]{article}
+ \usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts,tikz-cd, algorithm}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[noend]{algpseudocode}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+% * <sl115@rice.edu> 2018-05-17T13:36:36.078Z:
+%
+% ^.
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\Gal}{\text{Gal}}
+
+\newcommand{\true}{\textit{true}}
+\newcommand{\false}{\textit{false}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+
+\newenvironment{definition}[2][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{remark}[2][Remark.]{\begin{trivlist}
+\item[\hskip \labelsep {\itshape #1}]}{\end{trivlist}}
+
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{lemmaproof}[2][Proof of Lemma.]{\begin{trivlist}
+\item[\hskip \labelsep {\itshape #1}]}{\end{trivlist}}
+
+\newenvironment{example}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+%\renewcommand{\qedsymbol}{\filledbox}
+%Good resources for looking up how to do stuff:
+%Binary operators: http://www.access2science.com/latex/Binary.html
+%General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%Or just google stuff
+ 
+\title{\text{Notes on the Grassmannian operations in 3D}}
+\author{Seokbin Lee, 20160464}
+\maketitle
+
+We specify the problem of using the Minkowski sum, intersection, orthogonal complement, and projection operations on Grassmannian manifolds with dimensions \(d \leq 3\), under Exact Real Computation.
+
+\begin{lemma}{1.1}
+Testing inequality under Exact Real Computation is equivalent to the Halting Problem. In particular, testing inequality of two Grassmannians with the same dimension is undecidable but semi-decidable.
+\end{lemma}
+
+\begin{corollary}{1.2}
+Testing whether a line is not contained in a plane is undecidable but semi-decidable.
+\end{corollary}
+
+\begin{definition}{1.3}
+A Grassmannian is represented as a linearly independent set of vectors in \(\R^3\) that span the Grassmannian. The dimension of the Grassmannian is the cardinality of the basis set. By convention, the Grassmannian consisting of a single point has dimension zero, so it is represented by the empty set.
+\end{definition}
+
+\begin{proof}
+Given vectors \(\mathbf{v}\) representing the line and \(\mathbf{n}\) representing the normal vector to the plane, the problem is equivalent to testing whether \(\mathbf{v}\) is orthogonal to \(\mathbf{n}\). This holds if and only if \(\mathbf{v} \cdot \mathbf{n} = 0\), which is undecidable but semi-decidable by Lemma 1.1.
+\end{proof}
+
+\begin{definition}{2.1}
+The Minkowski sum of two Grassmannians is defined to be the subspace spanned the union of the respective bases.
+\end{definition}
+
+\begin{proposition}{2.2}
+Given Grassmannians \(G_1\) and \(G_2\) in \(\R^3\), an algorithm for the Minkowski sum is given as follows. We specify that there are no cases where decidability is a problem (as in Lemma 1.1, Corollary 1.2):
+
+\begin{algorithm}[H]
+\caption{Minkowski Addition}
+\begin{algorithmic}[1]
+\Procedure{Add}{$G_1, G_2$}
+\If{$dim(G_1) > dim(G_2)$}
+\State Swap $G_1$ and $G_2$
+\EndIf
+\If{$dim(G_2) = 3$}
+\Return $\R^3$
+\ElsIf{$dim(G_1) = 0$}
+\Return $G_2$
+\EndIf
+\State Assert $G_1 \not\subseteq G_2$
+\If{$dim(G_1) = 2$}
+\Return $\R^3$
+\ElsIf{$dim(G_2) = 1$}
+\Return $G_1 \cup G_2$ (as bases)
+\Else{
+\Return $\R^3$
+}
+\Comment{$G_1$ is a line, $G_2$ a plane}{}
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\end{proposition}
+
+\begin{proposition}{2.3}
+The following is a modified variant of the algorithm that avoids dealing with casework, such as disallowing equal Grassmannians. It supplies an additional variable \(k\) denoting the desired dimension of the output, specifying that this is valid.
+
+\begin{algorithm}[H]
+\caption{Modified Minkowski Addition}
+\begin{algorithmic}[2]
+\Procedure{Add}{$G_1, G_2, k$}
+\If{$dim(G_1) > dim(G_2)$}
+\State Swap $G_1$ and $G_2$
+\EndIf
+\If{$dim(G_2) = 3$}
+\Return $\R^3$
+\ElsIf{$dim(G_1) = 0$}
+\Return $G_2$
+\EndIf
+\State Assert $dim(G_2) \leq k \leq dim(G_1) + dim(G_2)$
+\If{$dim(G_1) = 2$ and $k = 3$}
+\Return $\R^3$
+\ElsIf{$dim(G_1) = 2$ and $k = 2$}
+\Return $G_1$
+\ElsIf{$dim(G_2) = 1$ and $k = 2$}
+\Return $G_1 \cup G_2$ (as bases)
+\ElsIf{$dim(G_2) = 1$ ad $k = 1$}
+\Return $G_1$
+\ElsIf{$k = 3$}
+\Return $\R^3$
+\Else{
+\Return $G_2$
+}
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\end{proposition}
+
+\begin{definition}{3.1}
+The intersection of two Grassmannians is defined to be the intersections as sets.
+\end{definition}
+
+\begin{proposition}{3.2}
+Given Grassmannians \(G_1\) and \(G_2\) in \(\R^3\), an algorithm for the intersection is given as follows. Again, we specify that there are no cases where decidability is a problem:
+
+\begin{algorithm}[H]
+\caption{Intersection}
+\begin{algorithmic}[3]
+\Procedure{Intersect}{$G_1, G_2$}
+\If{$dim(G_1) > dim(G_2)$}
+\State Swap $G_1$ and $G_2$
+\EndIf
+\If{$dim(G_2) = 3$}
+\Return $G_1$
+\ElsIf{$dim(G_1) = 0$}
+\Return $\emptyset$
+\EndIf
+\State Assert $G_1 \not\subseteq G_2$
+\If{$dim(G_1) = 2$}
+\Return $G_1 \cap G_2$ (as bases)
+\ElsIf{$dim(G_2) = 1$}
+\Return $\emptyset$
+\Else{
+\Return $\emptyset$
+}
+\Comment{$G_1$ is a line, $G_2$ a plane}
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\end{proposition}
+
+\begin{proposition}{3.3}
+The following is a modified variant of the algorithm that avoids dealing with casework, such as disallowing equal Grassmannians. It supplies an additional variable \(k\) denoting the desired dimension of the output, specifying that this is valid.
+
+\begin{algorithm}[H]
+\caption{Modified Intersection}
+\begin{algorithmic}[4]
+\Procedure{Intersect}{$G_1, G_2, k$}
+\If{$dim(G_1) > dim(G_2)$}
+\State Swap $G_1$ and $G_2$
+\EndIf
+\If{$dim(G_2) = 3$}
+\Return $G_1$
+\ElsIf{$dim(G_1) = 0$}
+\Return $\emptyset$
+\EndIf
+\State Assert $dim(G_1) + dim(G_2) - 3 \leq k \leq dim(G_1)$
+\If{$dim(G_1) = 2$ and $k = 1$}
+\Return $G_1 \cap G_2$ (as bases)
+\ElsIf{$dim(G_1) = 2$ and $k = 2$}
+\Return $G_1$
+\ElsIf{$dim(G_2) = 1$ and $k = 0$}
+\Return $\emptyset$
+\ElsIf{$dim(G_2) = 1$ ad $k = 1$}
+\Return $G_1$
+\ElsIf{$k = 0$}
+\Return $\emptyset$
+\Else{
+\Return $G_1$
+}
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\end{proposition}
+
+\begin{definition}{4.1}
+The orthogonal complement of a Grassmannian \(G\) is a Grassmannian \(H\) such that \(G + H = \R^3\) and \(g\) and \(h\) are orthogonal for all \(g \in G\) and \(h \in H\).
+\end{definition}
+
+\begin{proposition}{4.2}
+The algorithm for the orthogonal complement for a Grassmannian \(G\) is given as follows.
+
+\begin{algorithm}[H]
+\caption{Orthogonal Complement}
+\begin{algorithmic}[5]
+\Procedure{OrthoComp}{$G$}
+\State $d \gets dim(G)$
+\State Append vectors to basis of $G$ to have dimension 3
+\State {Apply Gram-Schmidt to make the basis orthogonal
+}
+\Return Last $3-d$ vectors
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\end{proposition}
+
+
+\end{document}
