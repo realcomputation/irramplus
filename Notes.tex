@@ -2,6 +2,7 @@
  \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb,amsfonts,tikz-cd, algorithm}
 \usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
 \usepackage[noend]{algpseudocode}
  
 \newcommand{\N}{\mathbb{N}}
@@ -15,6 +16,8 @@
 \newcommand{\F}{\mathbb{F}}
 \newcommand{\Aut}{\text{Aut}}
 \newcommand{\Gal}{\text{Gal}}
+\newcommand{\arXiv}[1]{\href{http://arXiv.org/abs/#1}{\textup{\texttt{arXiv:#1}}}\xspace}
+
 
 \newcommand{\true}{\textit{true}}
 \newcommand{\false}{\textit{false}}
@@ -55,14 +58,18 @@
 %General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
 %Or just google stuff
  
-\title{\text{Notes on the Grassmannian operations in 3D}}
+\title{\text{Notes on the Grassmannian in 3D as Continuous Abstract Data Type}}
 \author{Seokbin Lee, 20160464}
 \maketitle
 
-We specify the problem of using the Minkowski sum, intersection, orthogonal complement, and projection operations on Grassmannian manifolds with dimensions \(d \leq 3\), under Exact Real Computation.
+The Grassmannian (over $d$-dimensional Euclidean space) is the collection of all homogeneous subspaces of $\IR^d$,
+equipped with the operations Minkowski sum, intersection, orthogonal complement, and projection.
+In the case $d=3$ it consists, apart from the trivial and whole space, of all lines and planes through the origin.
+Here we (i) identify discrete advice \cite{Zie12} that makes the above operations computable in the sense of Computable Analysis \cite{Wei00}. We then (ii) devise algorithms for said operations in the paradigm of \emph{Exact Real Computation} \arXiv{1608.05787v4}, thus realizing a new rigorous continuous abstract data type.
+We (iii) implement and evaluate these algorithms using the \texttt{iRRAM} C++ library.
 
 \begin{lemma}{1.1}
-Testing inequality under Exact Real Computation is equivalent to the Halting Problem. In particular, testing inequality of two Grassmannians with the same dimension is undecidable but semi-decidable.
+Testing inequality under Exact Real Computation is equivalent to the Halting Problem. In particular, testing inequality of two elements (of same dimension 1 or 2) in the Grassmannian is undecidable but semi-decidable.
 \end{lemma}
 
 \begin{corollary}{1.2}
