@@ -1,7 +1,6 @@
 \documentclass[12pt]{article}
  \usepackage[margin=1in]{geometry} 
-\usepackage{amsmath,amsthm,amssymb,amsfonts,tikz-cd, algorithm}
-\usepackage[dvipsnames]{xcolor}
+\usepackage{amsmath,amsthm,amssymb,amsfonts,tikz-cd, algorithm,xspace}
 \usepackage{hyperref}
 \usepackage[noend]{algpseudocode}
  
@@ -18,6 +17,9 @@
 \newcommand{\Gal}{\text{Gal}}
 \newcommand{\arXiv}[1]{\href{http://arXiv.org/abs/#1}{\textup{\texttt{arXiv:#1}}}\xspace}
 
+\newcommand{\Seokbin}[1]{\textcolor{blue}{#1}} 
+\newcommand{\Martin}[1]{\textcolor{red}{#1}} 
+\newcommand{\Donghyun}[1]{\textcolor{green}{#1}} 
 
 \newcommand{\true}{\textit{true}}
 \newcommand{\false}{\textit{false}}
@@ -62,10 +64,10 @@
 \author{Seokbin Lee, 20160464}
 \maketitle
 
-The Grassmannian (over $d$-dimensional Euclidean space) is the collection of all homogeneous subspaces of $\IR^d$,
+The Grassmannian (over $d$-dimensional Euclidean space) is the collection of all homogeneous subspaces of $IR^d$,
 equipped with the operations Minkowski sum, intersection, orthogonal complement, and projection.
 In the case $d=3$ it consists, apart from the trivial and whole space, of all lines and planes through the origin.
-Here we (i) identify discrete advice \cite{Zie12} that makes the above operations computable in the sense of Computable Analysis \cite{Wei00}. We then (ii) devise algorithms for said operations in the paradigm of \emph{Exact Real Computation} \arXiv{1608.05787v4}, thus realizing a new rigorous continuous abstract data type.
+Here we (i) identify discrete advice \cite{Zie12} that makes the above operations computable in the sense of Computable Analysis \cite{Wei00}. We then (ii) devise algorithms for said operations in the paradigm of \emph{Exact Real Computation} [\arXiv{1608.05787v4}], thus realizing a new rigorous continuous abstract data type.
 We (iii) implement and evaluate these algorithms using the \texttt{iRRAM} C++ library.
 
 \begin{lemma}{1.1}
@@ -249,6 +251,6 @@ The algorithm for the orthogonal complement for a Grassmannian \(G\) is given as
 \end{proposition}
 
 \bibliographystyle{alpha}
-\bibliography{cca,grassmann}
+\bibliography{cca}
 
 \end{document}
