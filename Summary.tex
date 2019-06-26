@@ -250,6 +250,35 @@ The algorithm for the orthogonal complement for a Grassmannian element \(G\) is 
 
 \end{proposition}
 
+\begin{definition}{5.1} 
+The projection of a vector \(x\) onto a Grassmannian element \(G\) is a vector \(y \in G\) such that \(x-y\) and \(y\) are orthogonal.
+\end{definition}
+
+\begin{proposition}{5.2}
+An algorithm for the projection operation is given as follows.
+
+\begin{algorithm}
+\caption{Projection}
+\begin{algorithmic}[6]
+\Procedure{Proj}{$x, G$}
+\State $d \gets dim(G)$
+\If{$d = 0$}
+\Return $\mathbf{0}$
+\ElsIf{$d = 1$}
+\State $\{v\} \gets G$ 
+\Return $\frac{x \cdot v}{v \cdot v}v$
+\ElsIf{$d = 2$}
+\State $\{n\} \gets OrthComp(G)$
+\Return $x - \frac{x \cdot n}{n \cdot n}n$
+\Else{
+\Return $x$
+}
+\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+\end{proposition}
+
 We conclude by making the following remark: the devising of algorithms for higher dimensions is trickier; as the Grassmannian of dimension 2 over \(IR^4\) is not a projective space, there cannot be a "simple" algorithm for the cases \(d \geq 4\). 
 
 \bibliographystyle{alpha}
