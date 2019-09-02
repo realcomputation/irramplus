@@ -3,6 +3,8 @@ Here the "Complexity and Real Computation" team collects contributions and exten
 * continuous conditional
 * random real numbers and functions
 * Grassmannian/Quantum Logic
+* Haar averages
+* analytic functions
 * ...
 
 ## iRRAM
