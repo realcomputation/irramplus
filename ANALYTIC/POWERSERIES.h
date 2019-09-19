@@ -28,15 +28,15 @@ POWERSERIES& operator=(const POWERSERIES& other);
 
 COMPLEX eval(const COMPLEX& z);//only for nonnegative d.
 POWERSERIES differentiate(INTEGER d);//also for negative d. and return function has integral constant all 0.
-COMPLEX evalHelper(int p, const COMPLEX& z);
-INTEGER K, k;
 private:
 
 POWERSERIES differentiateHelper(INTEGER d);//for only differentiation (d>0)
 POWERSERIES integralHelper(INTEGER d);// for only integral (d>0)
+COMPLEX evalHelper(int p, const COMPLEX& z);
 
 COMPLEX w;
 COEF coef;
+INTEGER K, k;
 
 };
 
